@@ -1,4 +1,4 @@
-function Home({ onCerrarSesion, onVerRecetas }) {
+function Home({ onCerrarSesion, onVerRecetas, onVerCategorias }) {
     return (
         <main className="home">
             <header className="home-header">
@@ -57,6 +57,13 @@ function Home({ onCerrarSesion, onVerRecetas }) {
                         <p>
                             Ordená tus comidas por tipo de preparación.
                         </p>
+
+                        <button
+                            className="boton-login"
+                            onClick={onVerCategorias}
+                        >
+                            Ver categorías
+                        </button>
                     </article>
                 </div>
             </section>

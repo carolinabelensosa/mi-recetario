@@ -1,20 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Login({ onLogin }) {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [usuarios, setUsuarios] = useState([]);
 
     function ingresar(event) {
         event.preventDefault();
 
-        if (usuario === "admin" && password === "1234") {
+        const encontrado = usuarios.find(
+            (user) => user.email === usuario && user.password === password
+        );
+
+        if (encontrado) {
             setError("");
             onLogin();
         } else {
             setError("Usuario o contraseña incorrectos.");
         }
     }
+
+    const consultarbase = async () => {
+        const response = await fetch("https://6afe22bf3a0e70bc8d532696.mockapi.io/usuarios")
+        const data = await response.json()
+
+        console.log(data);
+        setUsuarios(data);
+    }
+
+    useEffect(() => {
+        consultarbase()
+    }, [])
 
     return (
         <main className="login">
